@@ -12,6 +12,8 @@
     
     
     
+    <link rel="alternate" href="/atom.xml" title="Xiaoyue&#39;s blog" type="application/atom+xml">
+    
     
     <link rel="icon" href="/img/favicon.ico">
     
@@ -146,8 +148,19 @@
   
 
   <div class="rsspart">
-	<a href="null" target="_blank" title="rss">RSS 订阅</a>
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
 </div>
+
+  
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">3</span></li></ul>
+  </div>
+
+
+  
 
 </aside>
 </div>
@@ -297,6 +310,27 @@ $(document).ready(function(){
 </script> 
 
 
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
 
 
 <script type="text/javascript">
