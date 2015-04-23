@@ -1,0 +1,471 @@
+
+ <!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  
+    <title>oracle sqlplus 常用命令大全 | Xiaoyue&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="lixiaoyue">
+    
+    <meta name="description" content="一、show和set命令是两条用于维护SQL*Plus系统变量的命令
+SQL&amp;gt; show all —查看所有68个系统变量值 
+SQL&amp;gt; show user —显示当前连接用户 
+SQL&amp;gt; show error　　 —显示错误 
+SQL&amp;gt; set heading off —禁">
+    
+    
+    
+    
+    <link rel="alternate" href="/atom.xml" title="Xiaoyue&#39;s blog" type="application/atom+xml">
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Xiaoyue&#39;s blog" title="Xiaoyue&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Xiaoyue&#39;s blog">Xiaoyue&#39;s blog</a></h1>
+				<h2 class="blog-motto">This is a new beginning!</h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/atom.xml">Rss</a></li>
+					
+						<li><a href="/sitemap.xml">Sitemap</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:yoursite.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/2015/04/23/oracle sqlplus 常用命令大全/" title="oracle sqlplus 常用命令大全" itemprop="url">oracle sqlplus 常用命令大全</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://yoursite.com" title="lixiaoyue">lixiaoyue</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2015-04-23T09:02:04.560Z" itemprop="datePublished">2015-04-23</time>
+    更新日期:<time datetime="2015-04-23T09:02:04.560Z" itemprop="dateModified">2015-04-23</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、show和set命令是两条用于维护SQL*Plus系统变量的命令"><span class="toc-number">1.</span> <span class="toc-text">一、show和set命令是两条用于维护SQL*Plus系统变量的命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#说明："><span class="toc-number">1.1.</span> <span class="toc-text">说明：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、Oracle_sqlplus语句编辑命令"><span class="toc-number">2.</span> <span class="toc-text">二、Oracle sqlplus语句编辑命令</span></a></li></ol>
+		</div>
+		
+		<h3 id="一、show和set命令是两条用于维护SQL*Plus系统变量的命令">一、show和set命令是两条用于维护SQL*Plus系统变量的命令</h3><ul>
+<li>SQL&gt; show all —查看所有68个系统变量值 </li>
+<li>SQL&gt; show user —显示当前连接用户 </li>
+<li>SQL&gt; show error　　 —显示错误 </li>
+<li>SQL&gt; set heading off —禁止输出列标题，默认值为ON </li>
+<li>SQL&gt; set feedback off —禁止显示最后一行的计数反馈信息，默认值为”对6个或更多的记录，回送ON” </li>
+<li>SQL&gt; set timing on —默认为OFF，设置查询耗时，可用来估计SQL语句的执行时间，测试性能 </li>
+<li>SQL&gt; set sqlprompt “SQL&gt; “ —设置默认提示符，默认值就是”SQL&gt; “ </li>
+<li>SQL&gt; set linesize 1000 —设置屏幕显示行宽，默认100 </li>
+<li>SQL&gt; set autocommit ON —设置是否自动提交，默认为OFF </li>
+<li>SQL&gt; set pause on —默认为OFF，设置暂停，会使屏幕显示停止，等待按下ENTER键，再显示下一页 </li>
+<li>SQL&gt; set arraysize 1 —默认为15 </li>
+<li><p>SQL&gt; set long 1000 —默认为80 </p>
+<h4 id="说明：">说明：</h4><p>long值默认为80，设置1000是为了显示更多的内容，因为很多数据字典视图中用到了long数据类型，如： </p>
+</li>
+<li><p>SQL&gt; desc user_views <br><br>列名        可空值否     类型<br><br>VIEW_NAME  NOT NULL   VARCHAR2(30) <br><br>TEXT_LENGTH NUMBER<br>TEXT LONG<br> </p>
+</li>
+<li>SQL&gt; define a = ‘’’20000101 12:01:01’’’ —定义局部变量，如果想用一个类似在各种显示中所包括的回车那样的常量，<br><br>—可以用define命令来设置 </li>
+<li>SQL&gt; select &amp;a from dual;<br><br>原值 1: select &amp;a from dual <br><br>新值 1: select ‘20000101 12:01:01’ from dual<br><br>2000010112:01:01 <br><br>20000101 12:01:01<br><br><strong>问题提出</strong>：<br><br>1、用户需要对数据库用户下的每一张表都执行一个相同的SQL操作，这时，一遍、一遍的键入SQL语句是很麻烦的。<br><br>实现方法：<br> </li>
+<li>SQL&gt; set heading off —禁止输出列标题 </li>
+<li>SQL&gt; set feedback off —禁止显示最后一行的计数反馈信息 </li>
+<li>列出当前用户下所有同义词的定义，可用来测试同义词的真实存在性<br><br>select ‘desc ‘||tname from tab where tabtype=’SYNONYM’; </li>
+<li>查询当前用户下所有表的记录数<br><br>select ‘select ‘’’||tname||’’’,count(*) from ‘||tname||’;’ from tab where tabtype=’TABLE’; </li>
+<li>把所有符合条件的表的select权限授予为public<br><br>select ‘grant select on ‘||table_name||’ to public;’ from user_tables where 《条件》; </li>
+<li>删除用户下各种对象 <br><br>select ‘drop ‘||tabtype||’ ‘||tname from tab; </li>
+<li>删除符合条件用户<br><br>select ‘drop user ‘||username||’ cascade;’ from all_users where user_id&gt;25; </li>
+<li>快速编译所有视图<br><br>——当在把数据库倒入到新的服务器上后(数据库重建)，需要将视图重新编译一遍，<br><br>——因为该表空间视图到其它表空间的表的连接会出现问题，可以利用PL/SQL的语言特性，快速编译。<br> </li>
+<li>SQL&gt; SPOOL ON.SQL </li>
+<li>SQL&gt; SELECT’ALTER VIEW ‘||TNAME||’ COMPILE;’ FROM TAB; </li>
+<li>SQL&gt; SPOOL OFF <br><br>然后执行ON.SQL即可。 </li>
+<li>SQL&gt; @ON.SQL <br><br>当然，授权和创建同义词也可以快速进行，如： </li>
+<li>SQL&gt; SELECT ‘GRANT SELECT ON ‘||TNAME||’ TO 用户名;’ FROM TAB; </li>
+<li>SQL&gt; SELECT ‘CREATE SYNONYM ‘||TNAME||’ FOR 用户名.’||TNAME||’;’ FROM TAB; <br><br><strong>命令列表：</strong> <br><br>假设当前执行命令为：select * from tab; <blockquote>
+<ul>
+<li>append　　添加文本到缓冲区当前行尾　　a order by tname　结果：select * from tab order by tname; （注：a后面跟2个空格） </li>
+<li>change/old/new 在当前行用新的文本替换旧的文本　c/*/tname　结果：select tname from tab; </li>
+<li>change/text　　从当前行删除文本　　c/tab　结果：select tname from ; </li>
+<li>del　　　　　　　删除当前行 </li>
+<li>del n　　　　　　删除第n行 </li>
+<li>input 文本　　 在当前行之后添加一行 </li>
+<li>list　　　　　 显示缓冲区中所有行 </li>
+<li>list n　　　　 显示缓冲区中第 n 行 </li>
+<li>list m n　　　 显示缓冲区中 m 到 n 行 </li>
+<li>run　　　　　　　执行当前缓冲区的命令 </li>
+<li>/　　　　　　　　执行当前缓冲区的命令 </li>
+<li>r　　　　　　　　执行当前缓冲区的命令 </li>
+<li>@文件名　　　　　运行调入内存的sql文件，如：SQL&gt; edit s&lt;回车&gt;<br>如果当前目录下不存在s.sql文件，则系统自动生成s.sql文件，<br>在其中输入”select * from tab;”，存盘退出。<br>  </li>
+</ul>
+</blockquote>
+</li>
+<li>SQL&gt; @s&lt;回车&gt; <br><br>系统会自动查询当前用户下的所有表、视图、同义词。 <br> <blockquote>
+<ul>
+<li>@@文件名　　　　 在.sql文件中调用令一个.sql文件时使用 </li>
+<li>save 文件名　　　将缓冲区的命令以文件方式存盘，缺省文件扩展名为.sql  </li>
+<li>get 文件名　　　 调入存盘的sql文件</li>
+<li>start 文件名　　 运行调入内存的sql文件 </li>
+<li>spool 文件名　　 把这之后的各种操作及执行结果”假脱机”即存盘到磁盘文件上，默认文件扩展名为.lst </li>
+<li>spool　　　　　　显示当前的”假脱机”状态</li>
+<li>spool off　　　　停止输出<br>例：<br>  </li>
+</ul>
+</blockquote>
+</li>
+<li>SQL&gt; spool a </li>
+<li>SQL&gt; spool<br><br>正假脱机到 A.LST<br>  </li>
+<li>SQL&gt; spool off </li>
+<li>SQL&gt; spool <br><br>当前无假脱机<br>  <blockquote>
+<ul>
+<li>exit　　　　　　 退出SQL*PLUS </li>
+<li>desc 表名　　　　显示表的结构 </li>
+<li>show user　　　　显示当前连接用户 </li>
+<li>show error　　　 显示错误 </li>
+<li>show all　　　　 显示所有68个系统变量值 </li>
+<li>edit　　　　　　 打开默认编辑器，Windows系统中默认是notepad.exe，把缓冲区中最后一条SQL语句调入afiedt.buf文件中进行编辑 </li>
+<li>edit 文件名　　　把当前目录中指定的.sql文件调入编辑器进行编辑 </li>
+<li>clear screen　　 清空当前屏幕显示 <h3 id="二、Oracle_sqlplus语句编辑命令">二、Oracle sqlplus语句编辑命令</h3>首先我们输入这样一条指令：<br><br>SELECT emp_id, emp_name<br>FROM Employees<br>input 命令可以接着上一条指令的后面添加语句，比如在上述语句运行后输入：<br>input WHERE emp_age &gt; 30<br>便可得到如下指令：<br><br>SELECT emp_id, emp_name<br>FROM Employees<br>WHERE emp_age &gt; 30 <br><br>ln 命令用于指定对以输入的第n行语句进行操作，比如在上述语句运行后输入：<br><br>l1则当前选中的语句行即为<br>SELECT emp_id, emp_name<br>（语句前有”*”表示） <br><br><br> a 命令用于直接在当前行的末尾加上字符，比如在上述语句运行后输入：<br>a , emp_dept<br>则执行的指令变为：<br>SELECT emp_id, emp_name, emp_dept<br>FROM Employees<br>WHERE emp_age &gt; 30<br><br> c 命令用于修改当前语句中的字符，比如在上述语句运行后输入：<br><br> c /emp_name/emp_age/则执行的指令变为：<br>SELECT emp_id, emp_age, emp_dept<br>FROM Employees<br>WHERE emp_age &gt; 30<br><br> del n 命令用于删除第n行指令，比如在上述语句运行后输入：<br><br> DEL 3<br>则执行的指令变为：<br>SELECT emp_id, emp_age, emp_dept<br>FROM Employees </li>
+</ul>
+</blockquote>
+</li>
+</ul>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+  <div class="article-tags">
+  
+  <span></span> <a href="/tags/oracle/">oracle</a><a href="/tags/sql/">sql</a><a href="/tags/数据库/">数据库</a>
+  </div>
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/日志/">日志</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://yoursite.com/2015/04/23/oracle sqlplus 常用命令大全/" data-title="oracle sqlplus 常用命令大全 | Xiaoyue&#39;s blog" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+
+<div class="next">
+<a href="/2015/04/23/sqlplus登录、连接命令/"  title="Sqlplus 登录、连接命令">
+ <strong>NEXT:</strong><br/> 
+ <span>Sqlplus 登录、连接命令
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#一、show和set命令是两条用于维护SQL*Plus系统变量的命令"><span class="toc-number">1.</span> <span class="toc-text">一、show和set命令是两条用于维护SQL*Plus系统变量的命令</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#说明："><span class="toc-number">1.1.</span> <span class="toc-text">说明：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#二、Oracle_sqlplus语句编辑命令"><span class="toc-number">2.</span> <span class="toc-text">二、Oracle sqlplus语句编辑命令</span></a></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分类</p>
+		<ul>
+		
+			<li><a href="/categories/日志/" title="日志">日志<sup>3</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+<div class="tagslist">
+	<p class="asidetitle">标签</p>
+		<ul class="clearfix">
+		
+			<li><a href="/tags/oracle/" title="oracle">oracle<sup>2</sup></a></li>
+		
+			<li><a href="/tags/sql/" title="sql">sql<sup>2</sup></a></li>
+		
+			<li><a href="/tags/开始/" title="开始">开始<sup>1</sup></a></li>
+		
+			<li><a href="/tags/我/" title="我">我<sup>1</sup></a></li>
+		
+			<li><a href="/tags/数据库/" title="数据库">数据库<sup>2</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  <div class="rsspart">
+	<a href="/atom.xml" target="_blank" title="rss">RSS 订阅</a>
+</div>
+
+  
+  <div class="tagcloudlist">
+    <p class="asidetitle">标签云</p>
+    <div class="tagcloudlist clearfix">
+       <a href="/tags/oracle/" style="font-size: 20px;">oracle</a><a href="/tags/sql/" style="font-size: 20px;">sql</a><a href="/tags/开始/" style="font-size: 10px;">开始</a><a href="/tags/我/" style="font-size: 10px;">我</a><a href="/tags/数据库/" style="font-size: 20px;">数据库</a>
+    </div>
+  </div>
+
+
+  
+  <div class="archiveslist">
+    <p class="asidetitle"><a href="/archives">归档</a></p>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2015/04/">四月 2015</a><span class="archive-list-count">5</span></li></ul>
+  </div>
+
+
+  
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	<div class="line">
+		<span></span>
+		<div class="author"></div>
+	</div>
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2015 
+		
+		<a href="http://yoursite.com" target="_blank" title="lixiaoyue">lixiaoyue</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"null"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css" media="screen" type="text/css">
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.article-content').each(function(i){
+    $(this).find('img').each(function(){
+      if ($(this).parent().hasClass('fancybox')) return;
+      var alt = this.alt;
+      if (alt) $(this).after('<span class="caption">' + alt + '</span>');
+      $(this).wrap('<a href="' + this.src + '" title="' + alt + '" class="fancybox"></a>');
+    });
+    $(this).find('.fancybox').each(function(){
+      $(this).attr('rel', 'article' + i);
+    });
+  });
+  if($.fancybox){
+    $('.fancybox').fancybox();
+  }
+}); 
+</script>
+
+
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-61555149-1', 'auto');  
+ga('send', 'pageview');
+</script>
+
+<div id="totop" style="position:fixed;bottom:150px;right:50px;cursor: pointer;">
+<a title="返回顶部"><img src="/img/scrollup.png"/></a>
+</div>
+<script src="/js/totop.js"></script>
+
+  </body>
+</html>

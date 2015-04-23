@@ -4,12 +4,16 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Hello World | Xiaoyue&#39;s blog</title>
+    <title>Sqlplus 登录、连接命令 | Xiaoyue&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="lixiaoyue">
     
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in ">
+    <meta name="description" content="常用：
+
+sqlplus username/password 如：普通用户登录  sqlplus scott/tiger
+sqlplus username/password@net_service_name 如: sqlplus scott/tiger@orcl
+sqlplus  username/">
     
     
     
@@ -71,15 +75,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/04/06/hello-world/" title="Hello World" itemprop="url">Hello World</a>
+      <a href="/2015/04/23/sqlplus登录、连接命令/" title="Sqlplus 登录、连接命令" itemprop="url">Sqlplus 登录、连接命令</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://yoursite.com" title="lixiaoyue">lixiaoyue</a>
     </p>
   <p class="article-time">
-    <time datetime="2015-04-06T10:14:43.762Z" itemprop="datePublished">2015-04-06</time>
-    更新日期:<time datetime="2015-04-06T10:14:43.762Z" itemprop="dateModified">2015-04-06</time>
+    <time datetime="2015-04-23T08:23:02.041Z" itemprop="datePublished">2015-04-23</time>
+    更新日期:<time datetime="2015-04-23T08:23:02.041Z" itemprop="dateModified">2015-04-23</time>
     
   </p>
 </header>
@@ -88,25 +92,57 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目录</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick_Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create_a_new_post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run_server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate_static_files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy_to_remote_sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#常用："><span class="toc-number">1.</span> <span class="toc-text">常用：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#注意：sys和system需要以sysdba登录"><span class="toc-number">1.1.</span> <span class="toc-text">注意：sys和system需要以sysdba登录</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在DOS环境下，输入“sqlplus_/?”，如下："><span class="toc-number">2.</span> <span class="toc-text">在DOS环境下，输入“sqlplus /?”，如下：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用_SQLPlus_执行_SQL,_PL/SQL_和_SQLPlus_语句:"><span class="toc-number">3.</span> <span class="toc-text">使用 SQLPlus 执行 SQL, PL/SQL 和 SQLPlus 语句:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_用法_1:_sqlplus_-H_|_-V"><span class="toc-number">3.1.</span> <span class="toc-text">1. 用法 1: sqlplus -H | -V</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_用法_2:_sqlplus_+_[_[_<_option>]_[{logon_|_/nolog}]_[<_start>]_]"><span class="toc-number">3.2.</span> <span class="toc-text">2. 用法 2: sqlplus + [ [ < option>] [{logon | /nolog}] [< start>] ]</span></a></li></ol></li></ol>
 		</div>
 		
-		<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+		<h2 id="常用：">常用：</h2><blockquote>
+<ul>
+<li>sqlplus username/password 如：普通用户登录  sqlplus scott/tiger</li>
+<li>sqlplus username/password@net_service_name 如: sqlplus scott/tiger@orcl</li>
+<li>sqlplus  username/password as sysdba 如：sqlplus sys/admin as sysdba</li>
+<li>sqlplus username/password@//host:port/sid <h3 id="注意：sys和system需要以sysdba登录">注意：sys和system需要以sysdba登录</h3></li>
+</ul>
+</blockquote>
+<p>在进入sql*plus之后，可以使用conn连接到其他用户，如：conn sys/admin as sysdba</p>
+<h2 id="在DOS环境下，输入“sqlplus_/?”，如下：">在DOS环境下，输入“sqlplus /?”，如下：</h2><p>C:\Documents and Settings\HH&gt;sqlplus /?<br>SQL<em>Plus: Release 11.2.0.1.0 Production on 星期六 8月 13 16:56:46 2011<br>Copyright (c) 1982, 2010, Oracle.  All rights reserved.<br>SQL</em>Plus: Release 11.2.0.1.0 Production<br>Copyright (c) 1982, 2010, Oracle.  All rights reserved.</p>
+<h2 id="使用_SQLPlus_执行_SQL,_PL/SQL_和_SQLPlus_语句:">使用 SQL<em>Plus 执行 SQL, PL/SQL 和 SQL</em>Plus 语句:</h2><h3 id="1-_用法_1:_sqlplus_-H_|_-V">1. 用法 1: sqlplus -H | -V</h3><pre><code>-<span class="ruby"><span class="constant">H</span>             显示 <span class="constant">SQL</span>*<span class="constant">Plus</span> 版本和用法帮助。
+</span>-<span class="ruby"><span class="constant">V</span>             显示 <span class="constant">SQL</span>*<span class="constant">Plus</span> 版本。</span>
+</code></pre><h3 id="2-_用法_2:_sqlplus_+_[_[_&lt;_option&gt;]_[{logon_|_/nolog}]_[&lt;_start&gt;]_]">2. 用法 2: sqlplus + [ [ &lt; option&gt;] [{logon | /nolog}] [&lt; start&gt;] ]</h3><pre><code>&lt;<span class="atom">option</span>&gt; 为: [-<span class="name">C</span> &lt;<span class="atom">version</span>&gt;] [-<span class="name">L</span>] [-<span class="name">M</span> <span class="string">"&lt;options&gt;"</span>] [-<span class="name">R</span> &lt;<span class="atom">level</span>&gt;] [-<span class="name">S</span>]
+-<span class="name">C</span> &lt;<span class="atom">version</span>&gt;   将受影响的命令的兼容性设置为&lt;<span class="atom">version</span>&gt; 指定的版本。该版本具有<span class="string">"x.y[.z]"</span> 格式。例如, -<span class="name">C</span> <span class="number">10.2</span>.0
+-<span class="name">L</span>             只尝试登录一次, 而不是 在出错时再次提示。
+-<span class="name">M</span> <span class="string">"&lt;options&gt;"</span> 设置输出的自动 <span class="name">HTML</span> 标记。选项的格式为:
+               <span class="name">HTML</span> [<span class="name">ON</span>|<span class="name">OFF</span>] [<span class="name">HEAD</span> <span class="atom">text</span>] [<span class="name">BODY</span> <span class="atom">text</span>] [<span class="name">TABLE</span> <span class="atom">text</span>][<span class="name">ENTMAP</span> {<span class="name">ON</span>|<span class="name">OFF</span>}] [<span class="name">SPOOL</span> {<span class="name">ON</span>|<span class="name">OFF</span>}] [<span class="name">PRE</span>[<span class="name">FORMAT</span>] {<span class="name">ON</span>|<span class="name">OFF</span>}]
+-<span class="name">R</span> &lt;<span class="atom">level</span>&gt;     设置受限模式, 以禁用与文件系统交互的<span class="name">SQL</span>*<span class="name">Plus</span> 命令。级别可以是 <span class="number">1</span>, <span class="number">2</span> 或 <span class="number">3</span>。最高限制级别为 -<span class="name">R</span> <span class="number">3</span>, 该级别禁用与文件系统交互的所有用户命令。
+-<span class="name">S</span>             设置无提示模式, 该模式隐藏命令的 <span class="name">SQL</span>*<span class="name">Plus</span> 标帜, 提示和回显 的显示。
+ &lt;<span class="atom">logon</span>&gt; 为: {&lt;<span class="atom">username</span>&gt;[/&lt;<span class="atom">password</span>&gt;][@&lt;<span class="atom">connect_identifier</span>&gt;] | / }[<span class="name">AS</span> {<span class="name">SYSDBA</span> | <span class="name">SYSOPER</span> | <span class="name">SYSASM</span>}] [<span class="name">EDITION</span>=<span class="atom">value</span>]
+</code></pre><p> 指定数据库帐户用户名, 口令和数据库连接的连接标识符。如果没有连接标识符, SQL*Plus 将连接到默认数据库。</p>
+<blockquote>
+<ul>
+<li>AS SYSDBA, AS SYSOPER 和 AS SYSASM 选项是数据库管理权限。</li>
+<li>&lt; connect_identifier&gt; 的形式可以是 Net 服务名或轻松连接。   </li>
+<li>@[&lt; net_service_name&gt; | [//]Host[:Port]/&lt; service_name&gt;]</li>
+<li><p>&lt; net_service_name&gt; 是服务的简单名称, 它解析为连接描述符。</p>
+<pre><code>示例: 使用 <span class="winutils">Net</span> 服务名连接到数据库, 且数据库 <span class="winutils">Net</span> 服务名为 ORCL。
+   sqlplus myusername/mypassword@ORCL
+</code></pre></li>
+<li><p>Host 指定数据库服务器计算机的主机名或 IP地址。</p>
+</li>
+<li>Port 指定数据库服务器上的监听端口。</li>
+<li><service_name> 指定要访问的数据库的服务名。<pre><code>示例: 使用轻松连接连接到数据库, 且服务名为 ORCL。
+   sqlplus myusername/mypassword<span class="property">@Host</span>/ORCL
+</code></pre></service_name></li>
+<li>/NOLOG 选项可启动 SQL*Plus 而不连接到数据库。</li>
+<li>EDITION 指定会话版本的值。</li>
+<li>&lt; start&gt; 为: @&lt; URL&gt;|&lt; filename&gt;[.&lt; ext&gt;] [&lt; parameter&gt;…]<br> 使用将分配给脚本中的替代变量的指定参数从 Web 服务器 (URL) 或本地文件系统 (filename.ext)运行指定的 SQL<em>Plus 脚本。<br>在启动 SQL</em>Plus 并且执行 CONNECT 命令后, 将运行站点概要文件 (例如,$ ORACLE_HOME/sqlplus/admin/glogin.sql) 和用户概要文件例如, 工作目录中的 login.sql)。这些文件包含 SQL*Plus 命令。</li>
+</ul>
+</blockquote>
   
 	</div>
 		<footer class="article-footer clearfix">
 
   <div class="article-tags">
   
-  <span></span> <a href="/tags/开始/">开始</a><a href="/tags/我/">我</a>
+  <span></span> <a href="/tags/oracle/">oracle</a><a href="/tags/sql/">sql</a><a href="/tags/数据库/">数据库</a>
   </div>
 
 
@@ -119,7 +155,7 @@
 
 <div class="article-share" id="share">
 
-  <div data-url="http://yoursite.com/2015/04/06/hello-world/" data-title="Hello World | Xiaoyue&#39;s blog" data-tsina="null" class="share clearfix">
+  <div data-url="http://yoursite.com/2015/04/23/sqlplus登录、连接命令/" data-title="Sqlplus 登录、连接命令 | Xiaoyue&#39;s blog" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -129,18 +165,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/04/23/在线 Markdown 编辑阅读器/" title="在线 Markdown 编辑阅读器使用方法">
+ <a href="/2015/04/23/oracle sqlplus 常用命令大全/" title="oracle sqlplus 常用命令大全">
   <strong>PREVIOUS:</strong><br/>
   <span>
-  在线 Markdown 编辑阅读器使用方法</span>
+  oracle sqlplus 常用命令大全</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/04/05/My-New-Post/"  title="My New Post">
+<a href="/2015/04/23/在线 Markdown 编辑阅读器/"  title="在线 Markdown 编辑阅读器使用方法">
  <strong>NEXT:</strong><br/> 
- <span>My New Post
+ <span>在线 Markdown 编辑阅读器使用方法
 </span>
 </a>
 </div>
@@ -157,7 +193,7 @@
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目录</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick_Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create_a_new_post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run_server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate_static_files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy_to_remote_sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#常用："><span class="toc-number">1.</span> <span class="toc-text">常用：</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#注意：sys和system需要以sysdba登录"><span class="toc-number">1.1.</span> <span class="toc-text">注意：sys和system需要以sysdba登录</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在DOS环境下，输入“sqlplus_/?”，如下："><span class="toc-number">2.</span> <span class="toc-text">在DOS环境下，输入“sqlplus /?”，如下：</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用_SQLPlus_执行_SQL,_PL/SQL_和_SQLPlus_语句:"><span class="toc-number">3.</span> <span class="toc-text">使用 SQLPlus 执行 SQL, PL/SQL 和 SQLPlus 语句:</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-_用法_1:_sqlplus_-H_|_-V"><span class="toc-number">3.1.</span> <span class="toc-text">1. 用法 1: sqlplus -H | -V</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-_用法_2:_sqlplus_+_[_[_<_option>]_[{logon_|_/nolog}]_[<_start>]_]"><span class="toc-number">3.2.</span> <span class="toc-text">2. 用法 2: sqlplus + [ [ < option>] [{logon | /nolog}] [< start>] ]</span></a></li></ol></li></ol>
   </div>
 
 <div id="asidepart">
